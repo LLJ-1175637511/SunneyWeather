@@ -5,13 +5,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.sunnywhether.logic.model.Location
+import com.example.sunnywhether.logic.model.Place
 import jxl.Workbook
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.lang.Exception
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,7 +51,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun readExcel() {
-       val intent = Intent(this,ExcelTest::class.java)
-        startActivity(intent)
+
     }
 }
