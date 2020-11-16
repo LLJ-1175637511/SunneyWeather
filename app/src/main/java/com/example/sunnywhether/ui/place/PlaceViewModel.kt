@@ -2,12 +2,14 @@ package com.example.sunnywhether.ui.place
 
 import android.content.res.AssetManager
 import android.util.Log
+import androidx.core.util.rangeTo
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.sunnywhether.getPlaceName
 import com.example.sunnywhether.logic.model.Location
 import com.example.sunnywhether.logic.model.Place
+import com.example.sunnywhether.logic.model.RealtimeResponse
 import jxl.Workbook
 import java.lang.Exception
 import kotlin.concurrent.thread
@@ -21,10 +23,11 @@ class PlaceViewModel : ViewModel() {
     private val placeAllList = mutableListOf<Place>()
 
     val placeLiveData = Transformations.switchMap(searchLiveData) { query ->
-//        Repository.searchPlaces(query)
         val addressList = mutableListOf<Place>()
         placeAllList.forEach {
-            if (it.address.contains(query)) {
+            if ((it.address.substring(query.indices) == query)) {
+                addressList.add(it)
+            }else if (it.address.contains(query)){
                 addressList.add(it)
             }
         }
@@ -66,7 +69,6 @@ class PlaceViewModel : ViewModel() {
                         placeAllList.add(Place(name, Location(lon, lat), address))
                     }
                 }
-
             }
         } catch (e: Exception) {
             e.printStackTrace()

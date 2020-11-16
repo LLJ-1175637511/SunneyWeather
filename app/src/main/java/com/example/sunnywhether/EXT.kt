@@ -27,3 +27,4 @@ fun String.getPlaceName(): String {
         }
     }
 }
+
